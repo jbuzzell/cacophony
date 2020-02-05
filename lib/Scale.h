@@ -2,6 +2,10 @@
 #define SCALE_H
 
 #include <vector>
+#include <algorithm>
+#include <iostream>
+#include "Note.h"
+#include "Arithmetic.h"
 
 using namespace std;
 
