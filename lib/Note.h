@@ -1,6 +1,8 @@
 #ifndef NOTE_H
 #define NOTE_H
 
+#include <vector>
+
 class Note {
 
 public:
@@ -9,12 +11,27 @@ public:
 	int mChannel, mVel;
 	int mNote;
 	double mFundamental;
+	NoteName mNoteName;
 
 private:
 
 	double getFundamental();
 	int getNoteFromFundamental();
 	int getNoteFromFundamental(double);
+	std::vector<NoteName> getNoteNamesFromMIDINumber(int);
+
+};
+
+const enum NoteLetter { A, B, C, D, E, F, G };
+const enum NoteSymbol { FLAT, SHARP, NONE };
+
+struct NoteName {
+public:
+
+	NoteName(NoteLetter letter, NoteSymbol symbol) : mLetter(letter), mSymbol(symbol) {}
+
+	NoteLetter mLetter;
+	NoteSymbol mSymbol;
 
 };
 

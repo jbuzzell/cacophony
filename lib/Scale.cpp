@@ -1,26 +1,12 @@
 #include "Scale.h"
 
-Scale::Scale(vector<Note> basis, int notes = 8) : mNumNotes(notes), mNotes(basis) {
+Scale::Scale(vector<Note> basis, int notes = 7) : mNumNotes(notes), mNotes(basis) {
 
-	/*while (basis.size != notes) {
 
-		Note root = basis[0];
-		Note last = basis.back;
-
-		/*
-		 *	use loop to determine next viable note in scale
-		 *	remain within the octave determined by scale root
-		 *	fill in the scale up to the value of notes
-		 *
-
-	}*/
-
-	for (Note i: basis) {
-		cout << i.mNote << endl;
-	}
 
 }
 
+// fuck all this shit yo
 double Scale::getHarmonyCoefficient() {
 
 	double score = 0;
