@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Note.h"
 #include "Arithmetic.h"
+#include <numeric>
 
 using namespace std;
 
@@ -13,12 +14,17 @@ class Scale {
 
 public:
 
-	Scale(vector<Note> basis, int notes);
+	Scale(vector<Note> basis);
+
+	/*
+	 *	TODO: implement constructor for variable size scales:
+	 *	Scale(vector<Note> basis, int notes);
+	 */
 
 	int mNumNotes;
 	vector<Note> mNotes;
 
-private:
+//private:
 
 	double getHarmonyCoefficient();
 
@@ -29,7 +35,8 @@ private:
 	 *				the more dissonant the note.
 	 */
 
-	double getHarmonyScore(Note one, Note two);
+	int getDissonance(Note one, Note two);
+	int getSize();
 
 };
 

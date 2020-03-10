@@ -6,3 +6,11 @@ int gcd(int a, int b) {
         return a;
     return gcd(b, a % b);
 }
+
+//https://stackoverflow.com/questions/4229870/c-algorithm-to-calculate-least-common-multiple-for-multiple-numbers
+int lcm(int a, int b)
+{
+    int temp = gcd(a, b);
+
+    return temp ? (a / temp * b) : 0;
+}

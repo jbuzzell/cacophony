@@ -2,7 +2,10 @@
 #include <math.h>
 
 Note::Note(double fundamental, int channel, int vel) : mChannel(channel), mVel(vel), mFundamental(fundamental) { 
+
 	mNote = getNoteFromFundamental(fundamental); 
+	mNoteNames = getNoteNamesFromMIDINumber(mNote);
+
 };
 
 double Note::getFundamental() {
@@ -27,32 +30,32 @@ std::vector<NoteName> Note::getNoteNamesFromMIDINumber(int midiNo) {
 
 	midiNo -= 9; // shift MIDI scale such that 12 == A0
 
-	switch (midiNo)
+	switch (midiNo % 12)
 	{
 		case 0:
-			return { NoteName(A, NONE) };
+			return { NoteName(NoteLetter::A, NoteSymbol::NONE) };
 		case 1:
-			return { NoteName(A, SHARP), NoteName(B, FLAT) };
+			return { NoteName(NoteLetter::A, NoteSymbol::SHARP), NoteName(NoteLetter::B, NoteSymbol::FLAT) };
 		case 2:
-			return { NoteName(B, NONE) };
+			return { NoteName(NoteLetter::B, NoteSymbol::NONE) };
 		case 3:
-			return { NoteName(C, NONE) };
+			return { NoteName(NoteLetter::C, NoteSymbol::NONE) };
 		case 4:
-			return { NoteName(C, SHARP), NoteName(D, FLAT) };
+			return { NoteName(NoteLetter::C, NoteSymbol::SHARP), NoteName(NoteLetter::D, NoteSymbol::FLAT) };
 		case 5:
-			return { NoteName(D, NONE) };
+			return { NoteName(NoteLetter::D, NoteSymbol::NONE) };
 		case 6:
-			return { NoteName(D, SHARP), NoteName(E, FLAT) };
+			return { NoteName(NoteLetter::D, NoteSymbol::SHARP), NoteName(NoteLetter::E, NoteSymbol::FLAT) };
 		case 7:
-			return { NoteName(E, NONE) };
+			return { NoteName(NoteLetter::E, NoteSymbol::NONE) };
 		case 8:
-			return { NoteName(F, NONE) };
+			return { NoteName(NoteLetter::F, NoteSymbol::NONE) };
 		case 9:
-			return { NoteName(F, SHARP), NoteName(G, FLAT) };
+			return { NoteName(NoteLetter::F, NoteSymbol::SHARP), NoteName(NoteLetter::G,NoteSymbol::FLAT) };
 		case 10:
-			return { NoteName(G, NONE) };
+			return { NoteName(NoteLetter::G, NoteSymbol::NONE) };
 		case 11:
-			return { NoteName(G, SHARP), NoteName(A, FLAT) };
+			return { NoteName(NoteLetter::G, NoteSymbol::SHARP), NoteName(NoteLetter::A, NoteSymbol::FLAT) };
 		default:
 			break;
 	}

@@ -1,34 +1,23 @@
 #include "Scale.h"
+#include "Interval.h"
 
-Scale::Scale(vector<Note> basis, int notes = 7) : mNumNotes(notes), mNotes(basis) {
+Scale::Scale(vector<Note> basis) {
 
-
-
-}
-
-// fuck all this shit yo
-double Scale::getHarmonyCoefficient() {
-
-	double score = 0;
-	int comparisons = 0;
-
-	/*for (int i = 0; i < mNotes.size--; i++) {
-		for (int j = i++; j < mNotes.size; j++) {
-			score += getHarmonyScore(mNotes[i], mNotes[j]);
-			comparisons++;
-		}
-	}
-	*/
-	return score / comparisons;
+	// only accept heptatonic scales for now
+	mNumNotes = 7;
+	mNotes = vector<Note>(7, Note(100));
 
 }
 
-double Scale::getHarmonyScore(Note one, Note two) {
+int Scale::getDissonance(Note one, Note two) {
+
+	return Interval(one, two).dissonance;
 	
-	// todo: make this a more intuitive metric
-	int div = gcd(int(one.mFundamental), int(two.mFundamental));
+}
 
-	return (int(one.mFundamental) / div) + (int(two.mFundamental) / div);
+int Scale::getSize() {
+
+	return mNumNotes;
 
 }
 
