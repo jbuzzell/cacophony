@@ -1,6 +1,6 @@
 #ifndef SCALE_H
 #define SCALE_H
-
+/*
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -16,28 +16,34 @@ public:
 
 	Scale(vector<Note> basis);
 
-	/*
+	
 	 *	TODO: implement constructor for variable size scales:
 	 *	Scale(vector<Note> basis, int notes);
-	 */
+	 
 
 	int mNumNotes;
-	vector<Note> mNotes;
+	Note noteA;
+	Note noteB;
+	Note noteC;
+	Note noteD;
+	Note noteE;
+	Note noteF;
+	Note noteG;
 
 //private:
 
 	double getHarmonyCoefficient();
 
-	/*
+	
 	 *	pre: Notes to be compared
 	 *	post: ratio of their base frequencies
 	 *	purpose: score the harmony/dissonance of two given notes. the higher the number,
 	 *				the more dissonant the note.
-	 */
+	 
 
 	int getDissonance(Note one, Note two);
 	int getSize();
 
 };
-
+*/
 #endif // !SCALE_H

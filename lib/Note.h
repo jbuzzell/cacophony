@@ -14,6 +14,9 @@ public:
 	double mFundamental;
 	std::vector<NoteName> mNoteNames;
 
+	//friend bool operator==(const Note& lhs, const Note& rhs);
+
+
 private:
 
 	double getFundamental();

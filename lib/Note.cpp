@@ -8,6 +8,8 @@ Note::Note(double fundamental, int channel, int vel) : mChannel(channel), mVel(v
 
 };
 
+
+
 double Note::getFundamental() {
 
 	return 12 * log2(mNote / 440.0) + 69;

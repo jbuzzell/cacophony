@@ -1,6 +1,9 @@
 #ifndef NOTE_NAME_H
 #define NOTE_NAME_H
 
+#include <string>
+#include <iostream>
+
 const enum class NoteLetter { A, B, C, D, E, F, G };
 const enum class NoteSymbol { FLAT, SHARP, NONE };
 
@@ -11,6 +14,10 @@ public:
 
 	NoteLetter mLetter;
 	NoteSymbol mSymbol;
+
+	void printName();
+
+	friend bool operator==(const NoteName& c1, const NoteName& c2);
 
 };
 
