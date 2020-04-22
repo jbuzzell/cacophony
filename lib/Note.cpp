@@ -4,11 +4,9 @@
 Note::Note(double fundamental, int channel, int vel) : mChannel(channel), mVel(vel), mFundamental(fundamental) { 
 
 	mNote = getNoteFromFundamental(fundamental); 
-	mNoteNames = getNoteNamesFromMIDINumber(mNote);
+	getNoteNamesFromMIDINumber(mNoteNames, mNote);
 
 };
-
-
 
 double Note::getFundamental() {
 
@@ -28,36 +26,53 @@ int Note::getNoteFromFundamental(double f) {
 
 }
 
-std::vector<NoteName> Note::getNoteNamesFromMIDINumber(int midiNo) {
+void Note::getNoteNamesFromMIDINumber(vector<NoteName>& noteNames, int midiNo) {
 
 	midiNo -= 9; // shift MIDI scale such that 12 == A0
 
 	switch (midiNo % 12)
 	{
 		case 0:
-			return { NoteName(NoteLetter::A, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::A, NoteSymbol::NONE));
+			break;
 		case 1:
-			return { NoteName(NoteLetter::A, NoteSymbol::SHARP), NoteName(NoteLetter::B, NoteSymbol::FLAT) };
+			noteNames.push_back(NoteName(NoteLetter::A, NoteSymbol::SHARP));
+			noteNames.push_back(NoteName(NoteLetter::B, NoteSymbol::FLAT));
+			break;
 		case 2:
-			return { NoteName(NoteLetter::B, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::B, NoteSymbol::NONE));
+			break;
 		case 3:
-			return { NoteName(NoteLetter::C, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::C, NoteSymbol::NONE));
+			break;
 		case 4:
-			return { NoteName(NoteLetter::C, NoteSymbol::SHARP), NoteName(NoteLetter::D, NoteSymbol::FLAT) };
+			noteNames.push_back(NoteName(NoteLetter::C, NoteSymbol::SHARP));
+			noteNames.push_back(NoteName(NoteLetter::D, NoteSymbol::FLAT));
+			break;
 		case 5:
-			return { NoteName(NoteLetter::D, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::D, NoteSymbol::NONE));
+			break;
 		case 6:
-			return { NoteName(NoteLetter::D, NoteSymbol::SHARP), NoteName(NoteLetter::E, NoteSymbol::FLAT) };
+			noteNames.push_back(NoteName(NoteLetter::D, NoteSymbol::SHARP));
+			noteNames.push_back(NoteName(NoteLetter::E, NoteSymbol::FLAT));
+			break;
 		case 7:
-			return { NoteName(NoteLetter::E, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::E, NoteSymbol::NONE));
+			break;
 		case 8:
-			return { NoteName(NoteLetter::F, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::F, NoteSymbol::NONE));
+			break;
 		case 9:
-			return { NoteName(NoteLetter::F, NoteSymbol::SHARP), NoteName(NoteLetter::G,NoteSymbol::FLAT) };
+			noteNames.push_back(NoteName(NoteLetter::F, NoteSymbol::SHARP));
+			noteNames.push_back(NoteName(NoteLetter::G, NoteSymbol::FLAT));
+			break;
 		case 10:
-			return { NoteName(NoteLetter::G, NoteSymbol::NONE) };
+			noteNames.push_back(NoteName(NoteLetter::G, NoteSymbol::NONE));
+			break;
 		case 11:
-			return { NoteName(NoteLetter::G, NoteSymbol::SHARP), NoteName(NoteLetter::A, NoteSymbol::FLAT) };
+			noteNames.push_back(NoteName(NoteLetter::G, NoteSymbol::SHARP));
+			noteNames.push_back(NoteName(NoteLetter::A, NoteSymbol::FLAT));
+			break;
 		default:
 			break;
 	}

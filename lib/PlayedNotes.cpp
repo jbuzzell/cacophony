@@ -3,15 +3,24 @@
 #include "Interval.h"
 #include "Arithmetic.h"
 
+PlayedNotes::PlayedNotes(){ mNumNotes = 0; }
+
 void PlayedNotes::add(Note n)
 {
-	mNotes.push_back(n);
-	mNumNotes++;
+	// if new note does not exist in list
+	if (find_if(mNotes.begin(), mNotes.end(), 
+		[&](const Note& it) {
+			return ((it.mNote - 9) % 12) == ((n.mNote - 9) % 12); 
+		}) == mNotes.end()) 
+	{
+		mNotes.push_back(n);
+		mNumNotes++;
+	}
 }
 
 Note PlayedNotes::suggestNote()
 {
-	std::vector<Note> candidates = {
+	vector<Note> candidates {
 		Note(27.5),
 		Note(29.14),
 		Note(30.87),
@@ -26,17 +35,16 @@ Note PlayedNotes::suggestNote()
 		Note(51.91),
 	};
 
-	auto newEnd = std::remove_if(candidates.begin(), candidates.end(),
+	candidates.erase(remove_if(candidates.begin(), candidates.end(),
 		[this](const Note& n) {
 			for (Note note : mNotes) {
 				if (((note.mNote - 9) % 12) == ((n.mNote - 9) % 12)) { return true; }
 			}
 			return false;
 		}
-	);
-	candidates.erase(newEnd, candidates.end());
+	), candidates.end());
 
-	std::vector<int> dissonanceVals = std::vector<int>(candidates.size());
+	vector<int> dissonanceVals(candidates.size(), 0);
 
 	for (int i = 0; i < candidates.size(); i++) {
 		int tmp = 0;
@@ -56,13 +64,18 @@ Note PlayedNotes::suggestNote()
 	}
 	target /= mNumNotes;
 
-	std::vector<int> dissonanceValsSorted = dissonanceVals;
+	vector<int> dissonanceValsSorted(dissonanceVals.begin(), dissonanceVals.end());
 
-	std::sort(dissonanceValsSorted.begin(), dissonanceValsSorted.end());
+	sort(dissonanceValsSorted.begin(), dissonanceValsSorted.end());
 
 	int closest = getNearestElement(dissonanceValsSorted, candidates.size(), target);
 
 	// TODO: scale for octaves
 
-	return candidates[std::distance(dissonanceVals.begin(), std::find(dissonanceVals.begin(), dissonanceVals.end(), closest))];
+	return candidates[distance(dissonanceVals.begin(), find(dissonanceVals.begin(), dissonanceVals.end(), closest))];
+}
+
+Note& PlayedNotes::operator[](int n)
+{
+	return mNotes[n];
 }

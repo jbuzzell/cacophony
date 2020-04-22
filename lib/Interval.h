@@ -1,5 +1,5 @@
 #ifndef INTERVAL_H
-#define INVERVAL_H
+#define INTERVAL_H
 
 #include "Note.h"
 

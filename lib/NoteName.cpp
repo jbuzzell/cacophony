@@ -2,9 +2,9 @@
 
 NoteName::NoteName(NoteLetter letter, NoteSymbol symbol) : mLetter(letter), mSymbol(symbol) {}
 
-void NoteName::printName()
+string NoteName::printName()
 {
-	std::string out = "";
+	string out = "";
 
 	switch (mLetter) {
 		case NoteLetter::A:
@@ -37,11 +37,5 @@ void NoteName::printName()
 			out += "#";
 	}
 
-	std::cout << out << std::endl;
-}
-
-bool operator==(const NoteName& c1, const NoteName& c2)
-{
-	return (int)c1.mLetter == (int)c1.mSymbol &&
-		(int)c2.mLetter == (int)c2.mSymbol;
+	return out;
 }

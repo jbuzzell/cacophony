@@ -1,5 +1,14 @@
 #include "Arithmetic.h"
 
+//arduino b screamin at me when i try to use the standard c++ version
+int absVal(int x)
+{
+    if (x < 0) {
+        return -x;
+    }
+    return x;
+}
+
 //https://www.tutorialspoint.com/cplusplus-program-to-find-gcd
 int gcd(int a, int b) {
     if (b == 0)
@@ -15,7 +24,7 @@ int getNearest(int x, int y, int target) {
     else
         return x;
 }
-int getNearestElement(std::vector<int> arr, int n, int target) {
+int getNearestElement(vector<int> arr, int n, int target) {
     if (target <= arr[0])
         return arr[0];
     if (target >= arr[n - 1])

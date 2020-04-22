@@ -5,15 +5,20 @@
 #include <algorithm>
 #include "Note.h"
 
+using namespace std;
+
 class PlayedNotes {
 
 public:
 
-	std::vector<Note> mNotes;
+	PlayedNotes();
+
+	vector<Note> mNotes;
 	int mNumNotes;
 
 	void add(Note n);
 	Note suggestNote();
+	Note& operator[](int n);
 
 };
 

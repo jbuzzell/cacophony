@@ -1,6 +1,5 @@
 #include "Interval.h"
-#include <math.h>
-#include <iostream>
+#include "Arithmetic.h"
 
 Interval::Interval(Note one, Note two) {
 
@@ -18,7 +17,7 @@ int Interval::getDissonance(Note one, Note two)
 {
 	int numerator = 0, denominator = 0;
 
-	switch (abs(((one.mNote - 9) % 12) - ((two.mNote - 9) % 12))) {
+	switch (absVal(((one.mNote - 9) % 12) - ((two.mNote - 9) % 12))) {
 	case 0:
 		numerator = 1;
 		denominator = 1;
@@ -81,7 +80,7 @@ void Interval::setDissonance(){
 
 void Interval::setNumeratorDenominator(Note one, Note two)
 {
-	switch (abs(((one.mNote - 9) % 12) - ((two.mNote - 9) % 12))) {
+	switch (absVal(((one.mNote - 9) % 12) - ((two.mNote - 9) % 12))) {
 	case 0:
 		numerator = 1;
 		denominator = 1;

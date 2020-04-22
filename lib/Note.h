@@ -4,25 +4,24 @@
 #include <vector>
 #include "NoteName.h"
 
+using namespace std;
+
 class Note {
 
 public:
 
-	Note(double fundamental, int cmd = 0x90, int vel = 0x45);
+	Note(double fundamental, int cmd = 1, int vel = 0x45);
 	int mChannel, mVel;
 	int mNote;
 	double mFundamental;
-	std::vector<NoteName> mNoteNames;
-
-	//friend bool operator==(const Note& lhs, const Note& rhs);
-
+	vector<NoteName> mNoteNames;
 
 private:
 
 	double getFundamental();
 	int getNoteFromFundamental();
 	int getNoteFromFundamental(double);
-	std::vector<NoteName> getNoteNamesFromMIDINumber(int);
+	void getNoteNamesFromMIDINumber(vector<NoteName>&, int);
 
 };
 
