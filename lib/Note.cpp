@@ -8,9 +8,9 @@ Note::Note(double fundamental, int channel, int vel) : mChannel(channel), mVel(v
 
 };
 
-double Note::getFundamental() {
+double Note::getFundamental(int note){
 
-	return 12 * log2(mNote / 440.0) + 69;
+	return pow(2.0, (((double)note - 69.0) / 12.0)) * 440.0;
 
 }
 

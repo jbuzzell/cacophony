@@ -16,9 +16,10 @@ public:
 	double mFundamental;
 	vector<NoteName> mNoteNames;
 
+	static double getFundamental(int);
+
 private:
 
-	double getFundamental();
 	int getNoteFromFundamental();
 	int getNoteFromFundamental(double);
 	void getNoteNamesFromMIDINumber(vector<NoteName>&, int);

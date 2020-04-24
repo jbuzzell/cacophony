@@ -18,6 +18,15 @@ void PlayedNotes::add(Note n)
 	}
 }
 
+int PlayedNotes::findLowestOctave()
+{
+	int lowest = 0;
+	for (int i = 0; i < mNotes.size(); i++) {
+		lowest = ((mNotes[i].mNote - 9) / 12);
+	}
+	return lowest;
+}
+
 Note PlayedNotes::suggestNote()
 {
 	vector<Note> candidates {
@@ -70,9 +79,9 @@ Note PlayedNotes::suggestNote()
 
 	int closest = getNearestElement(dissonanceValsSorted, candidates.size(), target);
 
-	// TODO: scale for octaves
+	Note tmp = candidates[distance(dissonanceVals.begin(), find(dissonanceVals.begin(), dissonanceVals.end(), closest))];
 
-	return candidates[distance(dissonanceVals.begin(), find(dissonanceVals.begin(), dissonanceVals.end(), closest))];
+	return Note(Note::getFundamental(((tmp.mNote - 9.0) * findLowestOctave()) + 9.0));
 }
 
 Note& PlayedNotes::operator[](int n)

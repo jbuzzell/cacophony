@@ -17,6 +17,7 @@ public:
 	int mNumNotes;
 
 	void add(Note n);
+	int findLowestOctave();
 	Note suggestNote();
 	Note& operator[](int n);
 
