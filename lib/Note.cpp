@@ -30,6 +30,8 @@ void Note::getNoteNamesFromMIDINumber(vector<NoteName>& noteNames, int midiNo) {
 
 	midiNo -= 9; // shift MIDI scale such that 12 == A0
 
+	// use push_back on a reference to a vector instead of assigning directly to a vector 
+	// so that we can appease the Teensy's fragile architecture
 	switch (midiNo % 12)
 	{
 		case 0:

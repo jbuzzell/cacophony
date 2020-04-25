@@ -10,7 +10,13 @@
 
 using namespace std;
 
-//arduino b screamin at me when i try to use the standard c++ version
+/*
+------------------------------------------------------------------------------------------------
+- START COPY-PASTE OF CACOPHONY NOTE LIBRARY CODE. TEENSY HATES THE C++ STD LIBRARY, 
+- AND WILL NOT COMPILE UNLESS YOU DIRECTLY DECLARE USAGE OF ANY STD LIBRARY FUNCTIONALITY 
+- IN THE SKETCH FILE. I RESENT THIS.
+------------------------------------------------------------------------------------------------
+*/
 int absVal(int x)
 {
     if (x < 0) {
@@ -134,15 +140,16 @@ class Note {
 
 public:
 
-  Note(double fundamental, int cmd = 2, int vel = 0x45);
+  Note(double fundamental, int cmd = 1, int vel = 0x45);
   int mChannel, mVel;
   int mNote;
   double mFundamental;
   vector<NoteName> mNoteNames;
 
+  static double getFundamental(int);
+
 private:
 
-  double getFundamental();
   int getNoteFromFundamental();
   int getNoteFromFundamental(double);
   void getNoteNamesFromMIDINumber(vector<NoteName>&, int);
@@ -156,9 +163,9 @@ Note::Note(double fundamental, int channel, int vel) : mChannel(channel), mVel(v
 
 };
 
-double Note::getFundamental() {
+double Note::getFundamental(int note){
 
-  return 12 * log2(mNote / 440.0) + 69;
+  return pow(2.0, (((double)note - 69.0) / 12.0)) * 440.0;
 
 }
 
@@ -388,6 +395,7 @@ public:
   int mNumNotes;
 
   void add(Note n);
+  int findLowestOctave();
   Note suggestNote();
   Note& operator[](int n);
 
@@ -406,6 +414,15 @@ void PlayedNotes::add(Note n)
     mNotes.push_back(n);
     mNumNotes++;
   }
+}
+
+int PlayedNotes::findLowestOctave()
+{
+  int lowest = 0;
+  for (int i = 0; i < mNotes.size(); i++) {
+    lowest = ((mNotes[i].mNote - 9) / 12);
+  }
+  return lowest;
 }
 
 Note PlayedNotes::suggestNote()
@@ -460,15 +477,20 @@ Note PlayedNotes::suggestNote()
 
   int closest = getNearestElement(dissonanceValsSorted, candidates.size(), target);
 
-  // TODO: scale for octaves
+  Note tmp = candidates[distance(dissonanceVals.begin(), find(dissonanceVals.begin(), dissonanceVals.end(), closest))];
 
-  return candidates[distance(dissonanceVals.begin(), find(dissonanceVals.begin(), dissonanceVals.end(), closest))];
+  return Note(Note::getFundamental(((tmp.mNote - 9.0) * findLowestOctave()) + 9.0));
 }
 
 Note& PlayedNotes::operator[](int n)
 {
   return mNotes[n];
 }
+/*
+------------------------------------------------------------------------------------------------
+- END COPY-PASTE OF CACOPHONY NOTE LIBRARY CODE
+------------------------------------------------------------------------------------------------
+*/
 
 
 // GUItool: begin automatically generated code

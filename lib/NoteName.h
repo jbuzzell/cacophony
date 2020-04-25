@@ -6,10 +6,24 @@
 using namespace std;
 
 
-
+// enums representing letters and symbols
 enum class NoteLetter { A, B, C, D, E, F, G };
 enum class NoteSymbol { FLAT, SHARP, NONE };
 
+/*
+------------------------------------------------------------------------------------------------
+- NOTENAME: a basic struct representing linguistic representations of musical notes
+-	e.g. A, Bb, C#
+-
+-	members:
+-		- mLetter: the letter representing the note
+-		- mSymbol: the symbol representing the note
+-
+-	methods:
+-		- printName(): return a string value of the note
+-		- equality operator
+------------------------------------------------------------------------------------------------
+*/
 struct NoteName {
 public:
 

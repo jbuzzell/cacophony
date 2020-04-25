@@ -1,6 +1,5 @@
 #include "Arithmetic.h"
 
-//arduino b screamin at me when i try to use the standard c++ version
 int absVal(int x)
 {
     if (x < 0) {
@@ -24,6 +23,8 @@ int getNearest(int x, int y, int target) {
     else
         return x;
 }
+
+//https://www.tutorialspoint.com/find-closest-number-in-array-in-cplusplus
 int getNearestElement(vector<int> arr, int n, int target) {
     if (target <= arr[0])
         return arr[0];
